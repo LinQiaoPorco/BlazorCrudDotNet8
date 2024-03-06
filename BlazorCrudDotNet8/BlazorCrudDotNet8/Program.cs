@@ -17,7 +17,8 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 builder.Services.AddDbContext<DataContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultCOnnection"));
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultCOnnection"),
+b => b.MigrationsAssembly("BlazorCrudDotNet8"));
 });
 
 builder.Services.AddScoped<IGameService, GameService>();

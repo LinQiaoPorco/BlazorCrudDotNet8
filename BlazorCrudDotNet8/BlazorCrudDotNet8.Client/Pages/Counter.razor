@@ -1,5 +1,5 @@
 ﻿@page "/counter"
-@* @attribute [RenderModeInteractiveAuto] *@
+@inject IJSRuntime JS
 @rendermode InteractiveWebAssembly
 
 <PageTitle>Counter</PageTitle>
@@ -10,12 +10,18 @@
 
 <button class="btn btn-primary" @onclick="IncrementCount" >Click me</button>
 
+<p>@iswasm</p>
+<p>@JS.GetType()</p>
+
 @code {
+
+    private bool iswasm =>JS.GetType().ToString()
+    .Contains("DefaultWebAssemblyJSRunTime");
     private int currentCount = 0;
 
     private void IncrementCount()
     {
         currentCount++;
-        Console.WriteLine(currentCount);
+
     }
 }
